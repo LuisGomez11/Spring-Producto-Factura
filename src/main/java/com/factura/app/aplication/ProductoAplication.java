@@ -37,4 +37,8 @@ public class ProductoAplication {
 		productoService.delete(codigo);
 	}
 	
+	public void update(ProductoRestDto producto) {
+		productoService.save(productoMapper.apiConvertirDtoADominio(producto));
+	}
+	
 }
