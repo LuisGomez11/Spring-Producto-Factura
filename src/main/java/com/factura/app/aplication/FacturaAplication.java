@@ -62,5 +62,9 @@ public class FacturaAplication {
 	public void delete(Codigo codigo) {
 		facturaService.delete(codigo);
 	}
+	
+	public void update(FacturaRestDto factura) {
+		facturaService.save(facturaMapper.apiConvertirDtoADominio(factura));
+	}
 
 }
