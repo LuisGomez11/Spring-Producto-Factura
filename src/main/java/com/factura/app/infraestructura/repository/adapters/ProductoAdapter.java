@@ -1,6 +1,7 @@
 package com.factura.app.infraestructura.repository.adapters;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,14 @@ import com.factura.app.infraestructura.repository.database.ProductoRepository;
 import com.factura.app.shared.domain.Codigo;
 
 @Service
-public class ProductoAdapter implements ProductoService{
+public class ProductoAdapter implements ProductoService {
 
 	@Autowired
 	ProductoRepository productoRepository;
-	
+
 	@Autowired
 	ProductoMapper productoMapper;
-	
+
 	@Override
 	public List<Producto> findAll() {
 		return productoMapper.convertirDtoParaDominio(productoRepository.findAll());
@@ -35,13 +36,21 @@ public class ProductoAdapter implements ProductoService{
 	@Override
 	public void save(Producto producto) {
 		productoRepository.save(productoMapper.convertirDominioADto(producto));
-		
+
 	}
 
 	@Override
 	public void delete(Codigo codigo) {
-		ProductoDto producto = productoRepository.findById(codigo.getValue()).orElseThrow(() -> new RegistroNoEncontrado());
+		ProductoDto producto = productoRepository.findById(codigo.getValue())
+				.orElseThrow(() -> new RegistroNoEncontrado());
 		productoRepository.deleteById(producto.getCodigo());
+	}
+
+	@Override
+	public List<Producto> findByIds(List<String> codigos) {
+//		return productoRepository.findAllById(codigos.stream().map(codigo -> codigo).collect(Collectors.toList()))
+//				.stream().map(producto -> productoMapper.convertirDtoADominio(producto)).collect(Collectors.toList());
+		return productoMapper.convertirDtoParaDominio(productoRepository.findAllById(codigos));
 	}
 
 }
