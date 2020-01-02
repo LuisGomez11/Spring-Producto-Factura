@@ -1,7 +1,6 @@
 package com.factura.app.infraestructura.repository.adapters;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +47,6 @@ public class ProductoAdapter implements ProductoService {
 
 	@Override
 	public List<Producto> findByIds(List<String> codigos) {
-//		return productoRepository.findAllById(codigos.stream().map(codigo -> codigo).collect(Collectors.toList()))
-//				.stream().map(producto -> productoMapper.convertirDtoADominio(producto)).collect(Collectors.toList());
 		return productoMapper.convertirDtoParaDominio(productoRepository.findAllById(codigos));
 	}
 

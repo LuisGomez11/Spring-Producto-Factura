@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.factura.app.aplication.FacturaAplication;
 import com.factura.app.domain.services.FacturaService;
 import com.factura.app.domain.services.ProductoService;
-import com.factura.app.infraestructura.dto.ProductoDto;
 import com.factura.app.infraestructura.mapper.FacturaMapper;
 import com.factura.app.infraestructura.mapper.ProductoMapper;
-import com.factura.app.infraestructura.repository.database.ProductoRepository;
 import com.factura.app.infraestructura.restdto.FacturaRestDto;
-import com.factura.app.infraestructura.restdto.ProductoRestDto;
 import com.factura.app.shared.domain.Codigo;
 
 @RestController
